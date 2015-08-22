@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page Test Suite</title>
+	<link rel="stylesheet" href="../qunit.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="../../css/libms.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="../../css/themes/smoothness/jquery-ui-1.8.12.custom.css" type="text/css" media="screen">
+	<script type="text/javascript" src="../../js/jquery-1.5.2.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui-1.8.14.custom.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../../js/jquery.validate.js"></script>
+	<script type="text/javascript" src="../qunit.js"></script>
+	<!-- Your libms file goes here -->
+	<script type="text/javascript" src="../../js/focus/focus-common.js"></script>
+	<script type="text/javascript" src="../../js/focus/focus-home.js"></script>
+	<!-- Your tests file goes here -->
+	<script type="text/javascript" src="test-focus-home.js"></script>
+</head>
+<body>
+	<h1 id="qunit-header">Home Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	
+	<div id="qunit-fixture">
+	
+	<form id="home-search-form">
+		<input id="text" type="text" value="test_text"/>
+	</form>
+	<form id="none-selected-form">
+			<input type="hidden" name="total-results-selected" value="" />
+			<div id="home-profiles-table-container">
+				<div id="home-profiles-page-number" style="display: none">1</div>
+				<div id="home-profiles-selected-group-id" style="display: none">2</div>
+				<div id="home-profiles-table-page-ctrl-container">
+					<div><span class="home-profiles-nextprev-link prev" >&lt; Previous</span></div>
+					<div id="home-profiles-table-page-info"><span>1</span> to <span>3</span> of <span>8</span></div>
+					<div><span class="home-profiles-nextprev-link next">Next &gt;</span></div>
+				</div>
+				<table id="home-profiles-table">
+					<thead></thead>
+					<tbody>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="1">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="1" /></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name One</span></td>
+							<td class="profile-link"><span class="profile-email profile">email1@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">1111111111</span></td>
+						</tr>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="2">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="2" /></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name Two</span></td>
+							<td class="profile-link"><span class="profile-email profile">email2@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">2222222222</span></td>
+						</tr>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="3">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="3" /></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name Three</span></td>
+							<td class="profile-link"><span class="profile-email profile">email3@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">3333333333</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</form>
+
+	<!-- ############### -->
+
+			<form id="one-selected-form">
+			<input type="hidden" name="total-results-selected" value="" />
+			<div id="home-profiles-table-container">
+				<div id="home-profiles-page-number" style="display: none">1</div>
+				<div id="home-profiles-selected-group-id" style="display: none">2</div>
+				<div id="home-profiles-table-page-ctrl-container">
+					<div><span class="home-profiles-nextprev-link prev" >&lt; Previous</span></div>
+					<div id="home-profiles-table-page-info"><span>1</span> to <span>3</span> of <span>8</span></div>
+					<div><span class="home-profiles-nextprev-link next">Next &gt;</span></div>
+				</div>
+				<table id="home-profiles-table">
+					<thead></thead>
+					<tbody>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="1">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="1" checked="checked" /></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name One</span></td>
+							<td class="profile-link"><span class="profile-email profile">email1@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">1111111111</span></td>
+						</tr>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="2">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="2" /></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name Two</span></td>
+							<td class="profile-link"><span class="profile-email profile">email2@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">2222222222</span></td>
+						</tr>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="3">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="3" /></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name Three</span></td>
+							<td class="profile-link"><span class="profile-email profile">email3@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">3333333333</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</form>
+
+	<!-- ############### -->
+
+			<form id="all-selected-form">
+			<input type="hidden" name="total-results-selected" value="" />
+			<div id="home-profiles-table-container">
+				<div id="home-profiles-page-number" style="display: none">1</div>
+				<div id="home-profiles-selected-group-id" style="display: none">2</div>
+				<div id="home-profiles-table-page-ctrl-container">
+					<div><span class="home-profiles-nextprev-link prev" >&lt; Previous</span></div>
+					<div id="home-profiles-table-page-info"><span>1</span> to <span>3</span> of <span>8</span></div>
+					<div><span class="home-profiles-nextprev-link next">Next &gt;</span></div>
+				</div>
+				<table id="home-profiles-table">
+					<thead></thead>
+					<tbody>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="1">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="1" checked="checked"/></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name One</span></td>
+							<td class="profile-link"><span class="profile-email profile">email1@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">1111111111</span></td>
+						</tr>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="2">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="2" checked="checked"/></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name Two</span></td>
+							<td class="profile-link"><span class="profile-email profile">email2@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">2222222222</span></td>
+						</tr>
+						<tr><td><input type="checkbox" name="all-profiles-checkbox" class="profile-checkbox"/></td></tr>						
+						<tr class="home-profiles-table-row" profile-id="3">
+							<td><span class="profile-checkbox profile"><input type="checkbox" class="profile-checkbox-input" name="profile-checkboxes" value="3" checked="checked"/></span></td>	
+							<td class="profile-link"><span class="profile-name profile">Full Name Three</span></td>
+							<td class="profile-link"><span class="profile-email profile">email3@example.com</span></td>
+							<td class="profile-link"><span class="profile-phone profile">3333333333</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</form>
+	</div>
+</body>
+</html>

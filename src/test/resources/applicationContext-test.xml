@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/jee
+http://www.springframework.org/schema/jee/spring-jee.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/security 
+http://www.springframework.org/schema/security/spring-security.xsd
+http://www.springframework.org/schema/task 
+http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<security:global-method-security
+		pre-post-annotations="enabled" />
+
+    <mvc:annotation-driven />
+    <task:annotation-driven />
+    <tx:annotation-driven />
+
+    <context:component-scan base-package="com.hurontg.*" />
+    
+	<bean id="libmsDS" class="org.apache.tomcat.jdbc.pool.DataSource"
+		destroy-method="close" p:driverClassName="${driver.class.name}" p:url="${url}"
+		p:initialSize="${initial.size}" p:maxActive="${max.active}" p:maxIdle="${max.idle}"
+		p:minIdle="${min.idle}" p:testOnBorrow="true" p:validationQuery="SELECT 1"
+		p:validationInterval="30000" p:timeBetweenEvictionRunsMillis="30000"
+		p:removeAbandoned="true" p:removeAbandonedTimeout="60" p:logAbandoned="true"
+		p:abandonWhenPercentageFull="75"
+		p:jdbcInterceptors="ConnectionState;StatementFinalizer;ResetAbandonedTimer;SlowQueryReport(threshold=3000)"
+		p:username="root" p:password="" />
+
+	<bean id="libmsEMF"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="libmsDS" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="libmsEMF" />
+		<property name="dataSource" ref="libmsDS" />
+	</bean>
+
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+
+		<property name="database" value="SQL_SERVER" />
+		<property name="showSql" value="false" />
+		<property name="generateDdl" value="false" />
+		<property name="databasePlatform" value="org.hibernate.dialect.SQLServer2012Dialect" />
+	</bean>
+
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+		
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- libms: Edit the package name below. -->
+	<bean id="logoutHandlerBean" class="com.hurontg.libms.security.LogoutSuccessHandlerImpl" />
+
+	<bean id="customAuthenticationFailureHandlerBean"
+		class="com.hurontg.libms.security.AuthenticationFailureHandlerImpl" />
+
+	<bean id="customAuthenticationSuccessHandlerBean"
+		class="com.hurontg.libms.security.AuthenticationSuccessHandlerImpl" />
+
+	<bean id="httpSessionEventListener"
+		class="com.hurontg.libms.security.SimpleHttpSessionEventListenerImpl" />
+
+	<!-- Uncomment the following section to enable Aspects -->
+	<!-- <aop:aspectj-autoproxy /> <bean id="authorizationMgr" class="com.hurontg.libms.aspect.AuthorizationMgr" 
+		/> -->
+
+	<context:annotation-config
+		transaction-manager="transactionManager" proxy-target-class="false" />
+
+	<util:properties id="libmsProperties" location="/libms-test.properties" />
+
+	<!--Bean to load properties file -->
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="/libms-test.properties" />
+	</bean>
+
+	<!-- mail -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mailserver.host}" />
+		<!-- <property name="port" value="${mailserver.port}" /> <property name="username" 
+			value="${mailserver.username}" /> <property name="password" value="${mailserver.password}" 
+			/> -->
+	</bean>
+
+	<!-- Configure the multipart resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="100000000" />
+
+	</bean>
+
+	<bean id="messageAdapter"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<util:list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+</beans>

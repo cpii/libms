@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+	</definition>
+
+	<definition name="login" extends="base.definition">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="/login.jsp" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="logout" extends="base.definition">
+		<put-attribute name="title" value="Logout" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="/logout.jsp" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="error" extends="base.definition">
+		<put-attribute name="title" value="Error" />
+		<put-attribute name="body" value="/WEB-INF/jsp/error.jsp" />
+	</definition>
+
+	<definition name="home" extends="base.definition">
+		<put-attribute name="title" value="Home Page" />
+		<put-attribute name="body" value="/WEB-INF/jsp/home/home.jsp" />
+	</definition>
+
+	<definition name="accessDenied" extends="base.definition">
+		<put-attribute name="title" value="Access Denied" />
+		<put-attribute name="body" value="/accessDenied.jsp" />
+	</definition>
+
+	<definition name="book-main" extends="base.definition">
+		<put-attribute name="title" value="Home Page" />
+		<put-attribute name="body" value="/WEB-INF/jsp/book/books.jsp" />
+	</definition>
+
+	<definition name="book-new" extends="base.definition">
+		<put-attribute name="title" value="Home Page" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/book/bookEntryForm.jsp" />
+	</definition>
+
+	<definition name="car-new" extends="base.definition">
+		<put-attribute name="title" value="Home Page" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="footer" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/book/car.jsp" />
+	</definition>
+	
+	<definition name="admin-home" extends="base.definition">
+        <put-attribute name="title" value="Home Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/home/adminHome.jsp" />
+    </definition>
+    
+    <definition name="staff-home" extends="base.definition">
+        <put-attribute name="title" value="Home Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/home/staffHome.jsp" />
+    </definition>
+    
+    <definition name="member-home" extends="base.definition">
+        <put-attribute name="title" value="Home Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/home/memberHome.jsp" />
+    </definition>
+        
+    <definition name="author-main" extends="base.definition">
+        <put-attribute name="title" value="Manage Author" />
+        <put-attribute name="body" value="/WEB-INF/jsp/author/authorMain.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,1 @@
+<p>This humble line of text is returned from your friendly server in response to an ajax call made on: ${serverTime}</p>
